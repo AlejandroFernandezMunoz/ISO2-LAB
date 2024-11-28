@@ -9,7 +9,6 @@ public class Proyecto {
     private String estado;
     private List<Colaborador> colaboradores = new ArrayList<>();
 
-    // Métodos getters y setters
     public String getNombre() {
         return nombre;
     }

@@ -12,7 +12,6 @@ public class Colaborador {
         this.permisos = new ArrayList<>();
     }
 
-    // Getters y Setters
     public String getNombre() {
         return nombre;
     }

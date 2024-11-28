@@ -5,7 +5,7 @@ import java.util.List;
 public class ConectorOrigen {
     private String origen;
     private boolean conexionActiva;
-    private List<String> permisos; // Agregar esta propiedad
+    private List<String> permisos;
 
     public boolean conectar(String origen) {
         this.origen = origen;
@@ -19,11 +19,7 @@ public class ConectorOrigen {
     }
 
     public List<String> obtenerDatos() {
-        if (conexionActiva) {
-            return permisos; // Simula datos obtenidos
-        } else {
-            return null;
-        }
+        return conexionActiva ? permisos : null;
     }
 
     public boolean verificarOrigen(String origen) {
@@ -38,12 +34,10 @@ public class ConectorOrigen {
         return conexionActiva;
     }
 
-    // Método setPermisos
     public void setPermisos(List<String> permisos) {
         this.permisos = permisos;
     }
 
-    // Getter opcional para permisos
     public List<String> getPermisos() {
         return permisos;
     }

@@ -1,8 +1,8 @@
 package pd.control;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import pd.dominio.Colaborador;
 import pd.dominio.Proyecto;
 
@@ -18,15 +18,11 @@ public class ControlProyectos {
     }
 
     public void actualizarProyecto(Proyecto proyecto) {
-        // Lógica para actualizar un proyecto
         System.out.println("Proyecto actualizado: " + proyecto.getNombre());
     }
 
     public void gestionarColaborador(Proyecto proyecto, Colaborador colaborador) {
-        if (!colaboradores.containsKey(proyecto)) {
-            colaboradores.put(proyecto, List.of());
-        }
-        colaboradores.get(proyecto).add(colaborador);
+        colaboradores.computeIfAbsent(proyecto, k -> new ArrayList<>()).add(colaborador);
         System.out.println("Colaborador agregado al proyecto: " + proyecto.getNombre());
     }
 

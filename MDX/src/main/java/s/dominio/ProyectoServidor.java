@@ -23,10 +23,6 @@ public class ProyectoServidor {
         this.permisos = permisos;
     }
 
-    public boolean esValido() {
-        return configuracion != null && estado != null;
-    }
-
     public String getEstado() {
         return estado;
     }

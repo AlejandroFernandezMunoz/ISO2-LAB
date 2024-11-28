@@ -30,12 +30,7 @@ public class ControlServidor {
     }
 
     public boolean validarClasificacion(String proyectoId, String categoria) {
-        if (clasificaciones.containsKey(proyectoId) && clasificaciones.get(proyectoId).equals(categoria)) {
-            System.out.println("Clasificación validada para el proyecto: " + proyectoId);
-            return true;
-        }
-        System.out.println("Clasificación no válida.");
-        return false;
+        return clasificaciones.getOrDefault(proyectoId, "").equals(categoria);
     }
 
     public void aplicarPermisos(ConectorOrigen proyecto, List<String> permisos) {
@@ -51,5 +46,4 @@ public class ControlServidor {
         permisos.remove(usuarioId);
         System.out.println("Acceso cerrado para el usuario: " + usuarioId);
     }
-
 }
