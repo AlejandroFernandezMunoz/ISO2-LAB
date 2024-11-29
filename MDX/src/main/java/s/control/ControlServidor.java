@@ -11,6 +11,9 @@ public class ControlServidor {
     private Map<String, List<String>> permisos = new HashMap<>();
     private List<ProyectoServidor> proyectos;
     private Map<String, String> clasificaciones = new HashMap<>();
+    private ServidorBaseDatos servidorBaseDatos;
+    private LogsSeguridad logsSeguridad;
+
 
     public void gestionarPermisos(String usuarioId, List<String> permisos) {
         this.permisos.put(usuarioId, permisos);
@@ -51,5 +54,47 @@ public class ControlServidor {
         permisos.remove(usuarioId);
         System.out.println("Acceso cerrado para el usuario: " + usuarioId);
     }
+    public ControlServidor() {
+        this.servidorBaseDatos = new ServidorBaseDatos();
+        this.logsSeguridad = new LogsSeguridad();
+    }
+
+    @Override
+    public boolean autenticarUsuario(String usuario, String contraseña) {
+        boolean autenticado = servidorBaseDatos.verificarUsuario(usuario);
+        logsSeguridad.registrarEvento(usuario, "Autenticación", autenticado);
+        return autenticado;
+    }
+
+    @Override
+    public void gestionarPermisos(String usuario, String operacion) {
+        boolean permitido = servidorBaseDatos.consultarPermisos(usuario).contains(operacion);
+        logsSeguridad.registrarEvento(usuario, "Gestión de permisos para operación: " + operacion, permitido);
+    }
+
+    public boolean procesarSolicitud(String usuario, String operacion) {
+        if (autenticarUsuario(usuario, "dummyPassword")) { // Contraseña fija para simplificación
+            gestionarPermisos(usuario, operacion);
+            return true;
+        }
+        return false;
+    }
+
+    public ServidorBaseDatos getServidorBaseDatos() {
+        return servidorBaseDatos;
+    }
+
+    public void setServidorBaseDatos(ServidorBaseDatos servidorBaseDatos) {
+        this.servidorBaseDatos = servidorBaseDatos;
+    }
+
+    public LogsSeguridad getLogsSeguridad() {
+        return logsSeguridad;
+    }
+
+    public void setLogsSeguridad(LogsSeguridad logsSeguridad) {
+        this.logsSeguridad = logsSeguridad;
+    }
+}
 
 }
