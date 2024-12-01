@@ -1,41 +1,42 @@
 package control;
 
-	public class GestorDatos {
-	    private RepositorioDatos repositorio;
+import java.util.Queue;
 
-	    public GestorDatos(RepositorioDatos repositorio) {
-	        this.repositorio = repositorio;
-	    }
+import dominio.Datos;
+import dominio.RepositorioDatos;
 
-	    // Guardar datos en el repositorio
-	    public void guardarDatos(Datos datos) {
-	        repositorio.agregarDatos(datos);
-	    }
+public class GestorDatos {
+    private RepositorioDatos repositorioDatos;
+    private Queue<Tarea> tareasPendientes;
 
-	    // Obtener datos del repositorio por ID
-	    public Datos obtenerDatos(int id) {
-	        return repositorio.buscarDatos(id);
-	    }
+    public RepositorioDatos getRepositorioDatos() {
+        return repositorioDatos;
+    }
 
-	    // Método para analizar datos
-	    public void analizarDatos() {
-	        System.out.println("Analizando los datos almacenados...");
-	        // Implementación del análisis (simulado)
-	    }
+    public void setRepositorioDatos(RepositorioDatos repositorioDatos) {
+        this.repositorioDatos = repositorioDatos;
+    }
 
-	    // Generar reporte con los datos actuales
-	    public void generarReporte() {
-	        System.out.println("Generando reporte de los datos...");
-	        // Implementación de generación de reporte
-	    }
+    public Queue<Tarea> getTareasPendientes() {
+        return tareasPendientes;
+    }
 
-	    // Método para obtener el repositorio de datos
-	    public RepositorioDatos getRepositorioDatos() {
-	        return repositorio;
-	    }
+    public void setTareasPendientes(Queue<Tarea> tareasPendientes) {
+        this.tareasPendientes = tareasPendientes;
+    }
 
-	    // Método para establecer un nuevo repositorio de datos
-	    public void setRepositorioDatos(RepositorioDatos repositorio) {
-	        this.repositorio = repositorio;
-	    }
-	}
+    public InformeAnalisis analizarDatos(Datos datos) {
+        // Lógica para analizar los datos
+        return new InformeAnalisis();
+    }
+
+    public Datos transformarDatos(Datos datos) {
+        // Lógica para transformar los datos
+        return datos;
+    }
+
+    public boolean prepararDatos(Datos datos) {
+        // Lógica para preparar los datos
+        return true;
+    }
+}

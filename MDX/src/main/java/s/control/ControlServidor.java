@@ -1,7 +1,7 @@
-package s.control;
+package control;
 
-import s.dominio.ConectorOrigen;
-import s.dominio.ProyectoServidor;
+import dominio.ConectorOrigen;
+import dominio.ProyectoServidor;
 
 import java.util.HashMap;
 import java.util.List;

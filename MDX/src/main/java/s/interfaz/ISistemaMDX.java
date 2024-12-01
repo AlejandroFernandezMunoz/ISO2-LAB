@@ -1,6 +1,6 @@
-package s.interfaz;
+package interfaz;
 
-import s.dominio.ConectorOrigen;
+import dominio.ConectorOrigen;
 
 public interface ISistemaMDX {
     boolean recibirProyecto(ConectorOrigen proyecto);
