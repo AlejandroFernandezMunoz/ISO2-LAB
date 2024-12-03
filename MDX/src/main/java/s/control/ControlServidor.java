@@ -13,6 +13,8 @@ public class ControlServidor {
     private Map<String, String> clasificaciones = new HashMap<>();
     private ServidorBaseDatos servidorBaseDatos;
     private LogsSeguridad logsSeguridad;
+    private Map<String, List<String>> permisos;
+    private ISistemaMDX servidorMDX;
 
 
     public void gestionarPermisos(String usuarioId, List<String> permisos) {
@@ -60,20 +62,20 @@ public class ControlServidor {
     }
 
     @Override
-    public boolean autenticarUsuario(String usuario, String contraseña) {
+    public boolean autenticarUsuario(String usuario, String contraseï¿½a) {
         boolean autenticado = servidorBaseDatos.verificarUsuario(usuario);
-        logsSeguridad.registrarEvento(usuario, "Autenticación", autenticado);
+        logsSeguridad.registrarEvento(usuario, "Autenticaciï¿½n", autenticado);
         return autenticado;
     }
 
     @Override
     public void gestionarPermisos(String usuario, String operacion) {
         boolean permitido = servidorBaseDatos.consultarPermisos(usuario).contains(operacion);
-        logsSeguridad.registrarEvento(usuario, "Gestión de permisos para operación: " + operacion, permitido);
+        logsSeguridad.registrarEvento(usuario, "Gestiï¿½n de permisos para operaciï¿½n: " + operacion, permitido);
     }
 
     public boolean procesarSolicitud(String usuario, String operacion) {
-        if (autenticarUsuario(usuario, "dummyPassword")) { // Contraseña fija para simplificación
+        if (autenticarUsuario(usuario, "dummyPassword")) { // Contraseï¿½a fija para simplificaciï¿½n
             gestionarPermisos(usuario, operacion);
             return true;
         }
@@ -95,6 +97,33 @@ public class ControlServidor {
     public void setLogsSeguridad(LogsSeguridad logsSeguridad) {
         this.logsSeguridad = logsSeguridad;
     }
+    public Map<String, List<String>> getPermisos() {
+        return permisos;
+    }
+
+    public void setPermisos(Map<String, List<String>> permisos) {
+        this.permisos = permisos;
+    }
+
+    public ISistemaMDX getServidorMDX() {
+        return servidorMDX;
+    }
+
+    public void setServidorMDX(ISistemaMDX servidorMDX) {
+        this.servidorMDX = servidorMDX;
+    }
+
+    public boolean autenticarUsuario(String usuario, String contraseÃ±a) {
+        // LÃ³gica para autenticar al usuario
+        return true;
+    }
+
+    public boolean validarPermiso(String usuario, String recurso) {
+        // LÃ³gica para validar permisos
+        return permisos.containsKey(usuario) && permisos.get(usuario).contains(recurso);
+    }
+}
 }
 
 }
+
