@@ -1,4 +1,4 @@
-package Control_S;
+package s.control;
 
 public class ConectorOrigen {
     private String origen;
